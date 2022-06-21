@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Update User</title>
+</head>
+<body>
+    <div class="wrapper-update">
+        <form action="/update-user"method="POST">
+            <h2>Update User : </h2>
+            <table class="create-user-table">
+            <tr>
+                <td>
+                <label for="">First Name</label>
+                </td>
+                <td><input type="text" name="firstName" value="<%= dataUser.firstName %>"></td>
+            </tr>
+            <tr>
+                <td>
+                <label for="">Last Name</label>
+                </td>
+                <td><input type="text" name="lastName" value="<%= dataUser.lastName %>"></td>
+            </tr>
+            <tr>
+                <td>
+                <label for="">Email</label>
+                </td>
+                <td><input type="email" name="email" value="<%= dataUser.email %>"></td>
+            </tr>
+            <tr>
+                <td>
+                <label for="">Address</label>
+                </td>
+                <td><input type="text" name="address" value="<%= dataUser.address %>"></td>
+            </tr>
+            <tr>
+                <input type="text" name="id" value="<%= dataUser.id %>" hidden>
+            </tr>
+            </table>
+            <button type="submit">Submit</button>
+        </form>
+
+    </div>
+</body>
+</html>

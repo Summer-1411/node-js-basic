@@ -31,3 +31,22 @@ body {
     background-color: #04AA6D;
     color: white;
   }
+  .create-user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .handle {
+    display: flex !important;
+    align-items: center;
+  }
+
+.wrapper-update {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+button {
+  cursor: pointer;
+  
+}

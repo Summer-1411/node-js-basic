@@ -1,17 +1,6 @@
 import pool from "../configs/connectDB"
 
 const getHomePage =  async (req, res) => {
-  // let data = []
-  // connection.query(
-  //   'SELECT * from `users` ',
-  //   function(err, results, fields) {
-  //     console.log(results);
-  //     data = results.map((row) => {return row})
-
-  //     return res.render('index.ejs', {dataUser: data, test: 'abc string test'})
-  //   }
-  // );
-
   const [rows, fields] = await pool.execute('SELECT * FROM `users` ');
   console.log(rows);
   return res.render('index.ejs', {dataUser: rows, test: 'abc string test'})
@@ -26,7 +15,39 @@ const getDetailPage = async (req, res) => {
 }
 
 
+const createUser = async (req, res) => {
+  console.log('check req: ', req.body);
+  let { firstName, lastName, email, address} = req.body
+  await pool.execute(`INSERT INTO users(firstName, lastName, email, address) VALUES (?, ?, ?, ?)`, [firstName, lastName, email, address])
+  return res.redirect('/')
+}
+
+const deleteUser = async (req, res) => {
+  let userId = req.body.userId
+  console.log('userId ', userId);
+  await pool.execute(`DELETE FROM users where id =  ${userId}`)
+  return res.redirect('/')
+}
+
+const getEditPage = async (req, res) => {
+  let id = req.params.id
+  let [user] = await pool.execute(`SELECT * FROM users WHERE id = ${id}`)
+  console.log('Check user', user);
+  return res.render('update.ejs', {dataUser: user[0]})
+}
+
+const postUpdateUser = async (req, res) => {
+  let {id, firstName, lastName, email, address} = req.body
+  await pool.execute('UPDATE users SET firstName = ?, lastName = ?, email = ?, address = ? WHERE id = ?', 
+  [firstName, lastName, email, address, id])
+  return res.redirect('/')
+}
+
 module.exports = {
     getHomePage,
-    getDetailPage
+    getDetailPage,
+    createUser,
+    deleteUser,
+    getEditPage,
+    postUpdateUser
 }
